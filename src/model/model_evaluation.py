@@ -197,7 +197,7 @@ def main():
 
         except Exception as e:
             logger.error(f"Failed to complete model evaluation: {e}")
-            print(f"Error: {e}")
+            print(f"Error from model evaluation: {e}")
 
 if __name__ == '__main__':
     main()
