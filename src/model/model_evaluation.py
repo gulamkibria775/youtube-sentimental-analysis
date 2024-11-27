@@ -85,6 +85,7 @@ def evaluate_model(model, X_test: np.ndarray, y_test: np.ndarray):
     try:
         # Predict and calculate classification metrics
         y_pred = model.predict(X_test)
+        print(y_pred)
         report = classification_report(y_test, y_pred, output_dict=True)
         cm = confusion_matrix(y_test, y_pred)
         

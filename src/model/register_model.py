@@ -1,11 +1,9 @@
-
 # register model
 
 import json
 import mlflow
 import logging
 import os
-from mlflow.tracking import MlflowClient
 
 # Set up MLflow tracking URI
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
@@ -51,17 +49,11 @@ def register_model(model_name: str, model_info: dict):
         model_version = mlflow.register_model(model_uri, model_name)
         
         # Transition the model to "Staging" stage
-        # client = mlflow.tracking.MlflowClient()
-        client = MlflowClient()
-        # client.transition_model_version_stage(
-        client.set_model_version_tag(
+        client = mlflow.tracking.MlflowClient()
+        client.transition_model_version_stage(
             name=model_name,
             version=model_version.version,
-
-            key="stage",
-            value="staging"
-
-            # stage="Staging"
+            stage="Staging"
         )
         
         logger.debug(f'Model {model_name} version {model_version.version} registered and transitioned to Staging.')
@@ -74,7 +66,7 @@ def main():
         model_info_path = 'experiment_info.json'
         model_info = load_model_info(model_info_path)
         
-        model_name = "yt_chrome_plugin_model"
+        model_name = "yt_chrome_plugin_model-2"
         register_model(model_name, model_info)
     except Exception as e:
         logger.error('Failed to complete the model registration process: %s', e)

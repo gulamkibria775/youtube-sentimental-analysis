@@ -145,6 +145,9 @@ def main():
         X_train_tfidf, y_train = apply_tfidf(train_data, max_features, ngram_range)
 
         # Train the LightGBM model using hyperparameters from params.yaml
+
+        print("tiiii",X_train_tfidf,"dddddd",y_train)
+
         best_model = train_lgbm(X_train_tfidf, y_train, learning_rate, max_depth, n_estimators)
 
         # Save the trained model in the root directory
